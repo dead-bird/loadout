@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "npm run serve",
-    "serve": "netlify-lambda build src/lambda; vue-cli-service serve;",
+    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build; netlify-lambda build src/lambda",
     "lint": "vue-cli-service lint"
   },
