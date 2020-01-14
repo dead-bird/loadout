@@ -1,3 +1,15 @@
+<script>
+export default {
+  data: () => ({
+    inventory: []
+  }),
+
+  beforeCreate() {
+    console.log(this.$route.params.id);
+  }
+};
+</script>
+
 <template>
   <div>
     <h1>
