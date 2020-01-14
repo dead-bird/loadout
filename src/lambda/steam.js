@@ -5,10 +5,12 @@ exports.handler = ({ queryStringParameters }, ctx, cb) => {
 
   axios
     .get(url)
-    .then(res => {
-      console.log(res.data);
+    .then(({ data }) => {
+      console.log(data);
 
-      return cb(null, { statusCode: 200, body: res.data });
+      cb(null, { statusCode: 200, body: "test" });
     })
-    .catch(err => cb(err));
+    .catch(err => {
+      cb(err);
+    });
 };
