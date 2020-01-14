@@ -7,7 +7,7 @@
 <style lang="scss">
 body,
 html {
-  @apply bg-gray-800 text-white;
+  @apply bg-gray-900 text-white;
 }
 
 pre,
