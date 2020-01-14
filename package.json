@@ -4,13 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "npm run serve",
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve": "netlify-lambda build src/lambda; vue-cli-service serve;",
+    "build": "vue-cli-service build; netlify-lambda build src/lambda",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "axios": "^0.19.1",
     "core-js": "^2.6.5",
+    "netlify-lambda": "^1.6.3",
     "tailwindcss": "^1.1.4",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",

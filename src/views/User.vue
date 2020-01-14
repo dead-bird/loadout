@@ -1,11 +1,19 @@
 <script>
+import axios from "axios";
+
 export default {
   data: () => ({
     inventory: []
   }),
 
   beforeCreate() {
-    console.log(this.$route.params.id);
+    axios(".netlify/functions/steam", { params: { id: this.$route.params.id } })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(e => {
+        console.error(e);
+      });
   }
 };
 </script>
