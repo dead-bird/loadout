@@ -8,7 +8,7 @@ exports.handler = ({ queryStringParameters }, ctx, cb) => {
     .then(res => {
       console.log(res.data);
 
-      cb(null, { statusCode: 200, body: res.data });
+      return cb(null, { statusCode: 200, body: res.data });
     })
     .catch(err => cb(err));
 };
