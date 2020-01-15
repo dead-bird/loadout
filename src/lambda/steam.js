@@ -1,4 +1,4 @@
-const axios = require("axios");
+const axios = require('axios');
 
 exports.handler = ({ queryStringParameters }, ctx, cb) => {
   const url = `https://steamcommunity.com/inventory/${queryStringParameters.id}/730/2?l=english&count=5000`;

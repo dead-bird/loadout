@@ -1,6 +1,6 @@
 <script>
 export default {
-  data: () => ({ id: 76561198006960956 })
+  data: () => ({ id: 76561198006960956 }),
 };
 </script>
 
