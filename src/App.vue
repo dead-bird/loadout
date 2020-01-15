@@ -12,6 +12,6 @@ html {
 
 pre,
 code {
-  @apply p-4 bg-gray-800 text-white overflow-scroll;
+  @apply p-4 bg-gray-300 text-black overflow-scroll;
 }
 </style>
