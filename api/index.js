@@ -1,7 +1,23 @@
+import getInventory from './getInventory';
 import limit from 'express-rate-limit';
 import dotenv from 'dotenv/config';
 import express from 'express';
+import axios from 'axios';
 import log from './log';
+
+const steam = axios.create({
+  baseURL: 'https://api.steampowered.com/',
+  method: 'get',
+});
+
+steam.interceptors.request.use(config => {
+  config.params = {
+    key: process.env.KEY,
+    ...config.params,
+  };
+
+  return config;
+});
 
 let app = express();
 
@@ -36,14 +52,35 @@ app.use(
   })
 );
 
-// Make some tears
-app.get('/user/:id', (req, res) => {
-  // const api = `https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key=${process.env.KEY}&steamids=${req.params.id}`;
+app.get('/user/:id', async (req, res) => {
+  const id = req.params.id;
 
-  return res.json({
-    status: 200,
-    message: 'hola',
-  });
+  try {
+    const inventory = await getInventory(steam, id);
+    const { data } = await steam('ISteamUser/GetPlayerSummaries/v0002/', {
+      params: { steamids: id },
+    });
+
+    // return res.json({ status: 200, items: test.data.result.items });
+
+    const user = data.response.players[0] || null;
+
+    return res.json(
+      user
+        ? { status: 200, user, inventory }
+        : { status: 404, msg: 'User not found' }
+    );
+  } catch (e) {
+    const err = e.response || null;
+
+    if (err) {
+      return res.json({ status: err.status, msg: err.statusText });
+    }
+
+    log.error(e);
+
+    return res.json({ status: 500, msg: 'An error occured' });
+  }
 });
 
 // Listen for connections
